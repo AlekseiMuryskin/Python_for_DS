@@ -17,4 +17,4 @@ min_coord,max_coord = np.where(mat==min_mat), np.where(mat==max_mat)
 #меняем их местами
 mat[max_coord],mat[min_coord] = min_mat, max_mat
 
-print('result:\n', mat)
+print(mat)
