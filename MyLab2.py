@@ -1,11 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import ndimage
+from pprint import pprint
 
 #входные параметры
 b = -0.4
 a = 0.2
-MyAngle=10 # угол для которого будет выведена матрица
+MyAngle=20 # угол для которого будет выведена матрица
 sigma = lambda x: (x > 1).astype(int)
 dig_img = np.dot(plt.imread('dig_img.png')[...,:3],[1,1,1]) # вход, изображение
 
@@ -55,21 +56,19 @@ for angle in np.arange(0,100,20):
 #матрица
 print('\n')
 print(('матрица результатов для угла {} градусов').format(MyAngle))
-for i in range(8):
-    print('\t'+str(i),end='')
+#for i in range(8):
+#    print('\t'+str(i),end='')
 
-print('\n',end='')
-
+#print('\n',end='')
+Mat=np.zeros((8,8))
 for i in range(8):
     D_rot = []
-    print(i, end='\t')
     for j in range(8):
         a = j * 48
         rot = ndimage.rotate(dig_img[5:104, 0 + a:48 + a], MyAngle, reshape=0)
         x = (rot > 1).astype(int).flatten()
         if np.array_equal(f(D[i][0]),f(x)):
-            print('1\t',end='')
-        else:
-            print('0\t',end='')
+            Mat[i][j]=1
 
-    print('\n',end='')
+
+pprint(Mat)
